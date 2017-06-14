@@ -23,7 +23,8 @@ Vue.config.productionTip = false
 const store = new Vuex.Store({
 	state:{
 		selectedSource:null,
-		sources:null
+		sources:null,
+		grid:true
 	},
 	mutations:{
 		updateSelectedSource(state,newSource){
@@ -31,6 +32,9 @@ const store = new Vuex.Store({
 		},
 		updateSources(state,sources){
 			state.sources = sources;
+		},
+		changeLayout(state){
+			state.grid = !state.grid;
 		}
 	},
 	actions:{
@@ -39,6 +43,9 @@ const store = new Vuex.Store({
 		},
 		update_sources(store,sources){
 			store.commit('updateSources',sources);
+		},
+		change_layout(store){
+			store.commit('changeLayout');
 		}
 	}
 })

@@ -1,6 +1,7 @@
 <template>
-  <el-row :gutter="20" v-loading.fullscreen.lock="loading">
-    <el-col :span="8" v-for="news in newsList" :key="news.title">
+
+<el-row :gutter="20" v-loading.fullscreen.lock="loading">
+    <el-col :span="span" :offset="offset" v-for="news in newsList" :key="news.title">
       <el-card :body-style="{ padding: '5px'}" style="height:500px;margin-bottom:5px" >
         <img v-lazy="news.urlToImage ? news.urlToImage : 'http://via.placeholder.com/350x300?text=No+image+available' " style="width:100%;height:300px;"/>
 
@@ -25,19 +26,25 @@ export default {
   data(){
   	return{
   		newsList:[],
-      loading:false
+      loading:false,
+      span: 8,
+      offset: 0
   	}
   },
   created(){
   	this.fetchNews();
   },
   watch:{
-  	'source':'fetchNews'
+  	'source':'fetchNews',
+    'grid':'changeLayout'
   },
   computed:{
   	source(){
   		return this.$store.state.selectedSource;
-  	}
+  	},
+    grid(){
+      return this.$store.state.grid;
+    }
   },
   methods:{
   	fetchNews(){
@@ -56,8 +63,17 @@ export default {
             this.loading = false;   
        		});
   		}
-  		
-  	}
+  	},
+    changeLayout(){
+      if(this.grid){
+        this.span = 8;
+        this.offset = 0;
+        return;
+      }
+
+      this.span = 14;
+      this.offset = 5;
+    }
   }
 
 }
@@ -67,7 +83,7 @@ export default {
  .wrapper {
   padding: 5px;
   background: #F9FAFC;
-  max-width: 400px;
+  max-width: 500;
   margin: 10px auto;
   border-radius: 4px;
 }

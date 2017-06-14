@@ -1,6 +1,6 @@
 <template>
   <el-row :gutter="20">
-   <el-col :span="10" style="margin-top: 10px" :offset='7'>
+   <el-col :span="18" style="margin-top: 10px" :offset='7'>
     <el-form :inline="true">
       <el-form-item label="News sources">
        <el-select v-model="selectedSource" placeholder="Please select a source">
@@ -23,6 +23,10 @@
            <el-button type="primary"><a v-bind:href="selectedSource.url" target="_blank">Go to {{ selectedSource.name }}</a></el-button>
         </el-tooltip>
       </el-form-item>
+      <el-form-item v-if="selectedSource">
+        <el-button type="primary" icon="menu" @click="changeLayout">Change Layout</el-button>
+      </el-form-item>
+
     </el-form>
      </el-col>
  </el-row>  
@@ -47,6 +51,9 @@ export default {
   methods:{
     changeSource(){
       this.$store.dispatch('update_selected_source',this.selectedSource);
+    },
+    changeLayout(){
+      this.$store.dispatch('change_layout');
     }
   }
 
