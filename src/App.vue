@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-loading.fullscreen.lock="loading">
     <SourceList></SourceList>
     <NewsList></NewsList>
   </div>
@@ -14,12 +14,18 @@ export default {
   created(){
   	this.fetchSource();
   },
+  data(){
+  	return{
+  		loading:false
+  	}
+  },
   components: {
     SourceList,
-    NewsList
+    NewsList,
   },
   methods:{
   	fetchSource(){
+  	   this.loading = true;
   	   this.axios.get('https://newsapi.org/v1/sources?language=en').then((response) => {
        let data = response.data;
        console.log(response.data);
@@ -36,6 +42,7 @@ export default {
           sources.push(hash[e]);
         }
         this.$store.dispatch('update_sources',sources);
+        this.loading = false;
        }
     });
   	}
