@@ -14,7 +14,7 @@
     </el-option-group>
   </el-select>
 
-  <el-button type="primary" v-if="selectedSource"><a v-bind:href="selectedSource.url">Go to {{ selectedSource.name }}</a></el-button>
+  <el-button type="primary" v-if="selectedSource"><a v-bind:href="selectedSource.url" target="_blank">Go to {{ selectedSource.name }}</a></el-button>
 
   
   </div>
@@ -27,31 +27,14 @@ export default {
   watch:{
     'selectedSource':'changeSource'
   },
-  created(){
-    this.axios.get('https://newsapi.org/v1/sources?language=en').then((response) => {
-       let data = response.data;
-       console.log(response.data);
-       let hash = {};
-       let result = [];
-       if(data.status === 'ok'){
-        data.sources.forEach(function(e){
-           let originalCat = e.category;
-           let category = originalCat.charAt(0).toUpperCase() + originalCat.slice(1);
-           hash[category] ? hash[category].options.push(e) : (hash[category] = {label:category,options:[e]});
-        });
-        console.log(hash);
-        for(let e in hash){
-          result.push(hash[e]);
-        }
-        console.log(result);
-        this.sources = result;
-       }
-    });
-  },
   data(){
     return{
       selectedSource:null,
-      sources:{},
+    }
+  },
+  computed:{
+    sources(){
+      return this.$store.state.sources;
     }
   },
   methods:{

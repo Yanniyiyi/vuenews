@@ -16,16 +16,23 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 const store = new Vuex.Store({
 	state:{
-		selectedSource:null
+		selectedSource:null,
+		sources:null
 	},
 	mutations:{
-		updateSource(state,newSource){
+		updateSelectedSource(state,newSource){
 			state.selectedSource = newSource;
+		},
+		updateSources(state,sources){
+			state.sources = sources;
 		}
 	},
 	actions:{
-		update_source(store,newSource){
+		update_selected_source(store,newSource){
 			store.commit('updateSource',newSource);
+		},
+		update_sources(store,sources){
+			store.commit('updateSources',sources);
 		}
 	}
 })
