@@ -29,7 +29,7 @@ const store = new Vuex.Store({
 	},
 	actions:{
 		update_selected_source(store,newSource){
-			store.commit('updateSource',newSource);
+			store.commit('updateSelectedSource',newSource);
 		},
 		update_sources(store,sources){
 			store.commit('updateSources',sources);

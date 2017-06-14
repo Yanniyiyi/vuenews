@@ -39,7 +39,7 @@ export default {
   },
   methods:{
     changeSource(){
-      this.$store.dispatch('update_source',this.selectedSource);
+      this.$store.dispatch('update_selected_source',this.selectedSource);
     }
   }
 
