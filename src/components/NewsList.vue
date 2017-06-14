@@ -2,7 +2,8 @@
   <el-row :gutter="20" v-loading.fullscreen.lock="loading">
     <el-col :span="8" v-for="news in newsList" :key="news.title">
       <el-card :body-style="{ padding: '5px'}" style="height:500px;margin-bottom:5px" >
-        <img v-bind:src="[news.urlToImage ? news.urlToImage : 'http://via.placeholder.com/350x300?text=No+image+available' ]" style="width:100%;height:300px;">
+        <img v-lazy="news.urlToImage ? news.urlToImage : 'http://via.placeholder.com/350x300?text=No+image+available' " style="width:100%;height:300px;"/>
+
         <div style="padding: 14px;">
           <span>{{ news.title }}</span>
           <div v-if="news.description" class="wrapper">

@@ -7,7 +7,13 @@ import 'element-ui/lib/theme-default/index.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Vuex from 'vuex'
-
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload,{
+  preLoad: 1.3,
+  error: 'http://via.placeholder.com/350x300?text=Can not load the image',
+  loading: 'https://media.giphy.com/media/l0Iyj4HFL0BkzBqV2/giphy.gif',
+  attempt: 1
+})
 Vue.use(Element)
 Vue.use(VueAxios, axios)
 Vue.use(Vuex)
