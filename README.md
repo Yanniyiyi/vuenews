@@ -1,3 +1,5 @@
+This project is using newsapi to get and display news. Based on https://www.youtube.com/watch?v=p-7Zi9xYt2M with special thanks. I added some other features.
+
 # vue-news
 
 > A Vue.js project
